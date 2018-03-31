@@ -147,3 +147,20 @@ X0014999CR07AZ-000636247R20EHF02EF8E
 *
  - This transaction code is wrong (Char 1)
 
+
+************   *********************
+ - This transaction code is wrong (Char 1)
+ - Non-numeric data here (Chars 2 - 8)
+ - Incorrect payment type (Chars 9 - 10)
+ - Incorrect store number (Chars 11 - 12)
+ - Inv number can only be numeric (Chars 15 - 21)
+ - The SKU code cannot be blank (Chars 22 - 36)
+
+Total Number of Invalid Records:  36
+************   ******
+ - This transaction code is wrong (Char 1)
+ - Non-numeric data here (Chars 2 - 8)
+ - Incorrect payment type (Chars 9 - 10)
+ - Incorrect store number (Chars 11 - 12)
+ - Inv number can only be numeric (Chars 15 - 21)
+

@@ -117,6 +117,25 @@
            05 ws-con-error-star                pic x(36)
                value '************************************'.
 
+       01 ws-counters.
+           05 ws-cnt-valid-records             pic 9(4)
+               value 0.
+           05 ws-cnt-invalid-records           pic 9(4)
+               value 0.
+
+       01 ws-output-valid-records.
+           05 ws-out-valid-total               pic x(31)
+               value "Total Number of Valid Records: ".
+           05 ws-out-valid-record-count        pic z(4)9
+               value 0.
+
+       01 ws-output-invalid-records.
+           05 ws-out-invalid-total             pic x(32)
+               value "Total Number of Invalid Records:".
+           05 filler                           pic x.
+           05 ws-out-invalid-record-count      pic z(2)9
+               value 0.
+
        01 ws-error-report-header.
            05 filler                           pic x(12).
            05 filler                           pic x(12)
@@ -124,8 +143,6 @@
            05 filler                           pic x(12).
 
        01 ws-error-messages.
-           05 ws-ems-ERRORS                    pic x(7)
-               value "Errors:".
            05 ws-ems-trns-code                 pic x(42)
                value " - This transaction code is wrong (Char 1)".
            05 ws-ems-trns-amt                  pic x(38)
@@ -174,6 +191,7 @@
 
            perform 100-open-files.
            perform 200-process-records until ws-eof-flag = "Y".
+           perform 370-write-total-record-counts.
            perform 400-create-error-report.
            perform 999-close-files.
            goback.
@@ -327,11 +345,24 @@
        300-invalid-record.
 
            write invalid-line from input-line.
+           add 1 to ws-cnt-invalid-records.
 
       *if the record is valid
        350-valid-record.
 
            write valid-line from input-line.
+           add 1 to ws-cnt-valid-records.
+
+      *Write the total record counts to each file.
+       370-write-total-record-counts.
+
+           write valid-line   from spaces.
+           move  ws-cnt-valid-records   to ws-out-valid-record-count.
+           write valid-line   from ws-output-valid-records.
+
+           write invalid-line from spaces.
+           move  ws-cnt-invalid-records to ws-out-invalid-record-count.
+           write invalid-line from ws-output-invalid-records.
 
       *Generate the error report
        400-create-error-report.
