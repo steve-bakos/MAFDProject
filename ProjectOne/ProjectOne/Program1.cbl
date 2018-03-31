@@ -15,6 +15,10 @@
            assign to "../../../data/project1.dat"
            organization is line sequential.
 
+           select error-file
+           assign to "../../../data/invalid.out"
+           organization is line sequential.
+
       *Output file declarations
            select valid-file
            assign to "../../../data/valid.out"
@@ -24,8 +28,28 @@
            assign to "../../../data/invalid.out"
            organization is line sequential.
 
+           select error-report
+           assign to "../../../data/error-report.out"
+           organization is line sequential.
+
        data division.
        file section.
+
+      *Declare the error line used to create the error report
+       fd error-file
+           data record is error-in
+           record contains 36 characters.
+
+       01 error-in.
+           05 ei-trans-code                    pic x.
+           05 ei-trans-amt                     pic 9(5)v99.
+           05 ei-pay-type                      pic xx.
+           05 ei-store-num                     pic 99.
+           05 ei-invoice-number.
+               10 ei-inv-prefix                pic xx.
+               10 ei-inv-hyphen                pic x.
+               10 ei-inv-number                pic 9(6).
+           05 ei-sku-code                      pic x(15).
 
       *Declare an input line
        fd input-file
@@ -57,6 +81,13 @@
 
        01 invalid-line                         pic x(36).
 
+      *Declare an error report line
+       fd error-report
+           data record is error-out
+           record contains 49 characters.
+
+       01 error-out                            pic x(49).
+
        working-storage section.
 
        77 ws-eof-flag                          pic x
@@ -83,14 +114,68 @@
                value 03.
            05 ws-con-store-num-07              pic 99
                value 07.
+           05 ws-con-error-star                pic x(36)
+               value '************************************'.
+
+       01 ws-error-report-header.
+           05 filler                           pic x(12).
+           05 filler                           pic x(12)
+               value "ERROR REPORT".
+           05 filler                           pic x(12).
+
+       01 ws-error-messages.
+           05 ws-ems-ERRORS                    pic x(7)
+               value "Errors:".
+           05 ws-ems-trns-code                 pic x(42)
+               value " - This transaction code is wrong (Char 1)".
+           05 ws-ems-trns-amt                  pic x(38)
+               value " - Non-numeric data here (Chars 2 - 8)".
+           05 ws-ems-pay-type                  pic x(40)
+               value " - Incorrect payment type (Chars 9 - 10)".
+           05 ws-ems-store-num                 pic x(41)
+               value " - Incorrect store number (Chars 11 - 12)".
+           05 ws-ems-inv-prefix                pic x(47)
+               value " - Inv prefix cannot be numeric (Chars 13 - 14)".
+           05 ws-ems-inv-number                pic x(49)
+               value " - Inv number can only be numeric (Chars 15 - 21)"
+                   .
+           05 ws-ems-sku-number                pic x(47)
+               value " - The SKU code cannot be blank (Chars 22 - 36)".
+
+
+       01 ws-error-checks.
+           05 ws-err-chk-trans-code            pic x
+               value "N".
+           05 ws-err-chk-trans-amt             pic x
+               value "N".
+           05 ws-err-chk-pay-type              pic x
+               value "N".
+           05 ws-err-chk-store-num             pic x
+               value "N".
+           05 ws-err-chk-inv-prefix            pic x
+               value "N".
+           05 ws-err-chk-inv-number            pic x
+               value "N".
+           05 ws-err-chk-sku-code              pic x
+               value 'N'.
+
+       01 ws-error-stars.
+           05 ws-erstrs-trans-code             pic x.
+           05 ws-erstrs-trans-amt              pic x(7).
+           05 ws-erstrs-pay-type               pic xx.
+           05 ws-erstrs-store-num              pic xx.
+           05 ws-erstrs-inv-prefix             pic xx.
+           05 filler                           pic x.
+           05 ws-erstrs-inv-number             pic x(6).
+           05 ws-erstrs-sku-code               pic x(15).
 
        procedure division.
        000-main.
 
-           perform 100-open-files
+           perform 100-open-files.
            perform 200-process-records until ws-eof-flag = "Y".
-
-           perform 999-close-files
+           perform 400-create-error-report.
+           perform 999-close-files.
            goback.
 
       *Open the files needed
@@ -248,8 +333,187 @@
 
            write valid-line from input-line.
 
+      *Generate the error report
+       400-create-error-report.
+
+           close invalid-file.
+
+           move "N" to ws-eof-flag.
+
+           open input error-file.
+           open output error-report.
+
+           read error-file
+               at end move "Y" to ws-eof-flag.
+
+           perform 420-write-report-headers.
+
+      *Write error report headers
+       420-write-report-headers.
+           write error-out from ws-error-report-header.
+           write error-out from spaces.
+
+           perform 440-write-error-records until ws-eof-flag = "Y".
+
+      *Write the records with errors to the report
+       440-write-error-records.
+
+           write error-out from error-in.
+           perform 500-list-mistakes-with-record.
+
+           write error-out from ws-error-stars.
+           move spaces to ws-error-stars.
+           
+           perform 460-write-error-messages.
+           write error-out from spaces.
+
+           read error-file
+               at end move "Y" to ws-eof-flag.
+
+      *Tell the user what is wrong with these records
+       460-write-error-messages.
+       
+           if (ws-err-chk-trans-code = "Y")
+
+               write error-out from ws-ems-trns-code
+               move "N" to ws-err-chk-trans-code
+
+           end-if.
+
+           if (ws-err-chk-trans-amt = "Y")
+
+               write error-out from ws-ems-trns-amt
+               move "N" to ws-err-chk-trans-amt
+
+           end-if.
+
+           if (ws-err-chk-pay-type = "Y")
+
+               write error-out from ws-ems-pay-type
+               move "N" to ws-err-chk-pay-type
+
+           end-if.
+
+           if (ws-err-chk-store-num = "Y")
+
+               write error-out from ws-ems-store-num
+               move "N" to ws-err-chk-store-num
+
+           end-if.
+
+           if (ws-err-chk-inv-prefix = "Y")
+
+               write error-out from ws-ems-inv-prefix
+               move "N" to ws-err-chk-inv-prefix
+
+           end-if.
+
+           if (ws-err-chk-inv-number = "Y")
+
+               write error-out from ws-ems-inv-number
+               move "N" to ws-err-chk-inv-number
+
+           end-if.
+
+           if (ws-err-chk-sku-code = "Y")
+
+               write error-out from ws-ems-sku-number
+               move 'N' to ws-err-chk-sku-code
+
+           end-if.
+
+      *Start to list the problems with this record.
+       500-list-mistakes-with-record.
+
+           perform 510-error-trans-code.
+           perform 520-error-trans-amt.
+           perform 530-error-payment-type.
+           perform 540-error-store-number.
+           perform 550-error-invoice-prefix.
+           perform 560-error-invoice-number.
+           perform 570-error-sku-number.
+
+      *Check if the transaction code is wrong
+       510-error-trans-code.
+
+           if (ei-trans-code not equal ws-con-trns-code-L  and
+               ei-trans-code not equal ws-con-trns-code-R  and
+               ei-trans-code not equal ws-con-trns-code-S) then
+
+               move ws-con-error-star to ws-erstrs-trans-code
+               move "Y" to ws-err-chk-trans-code
+
+           end-if.
+
+      *Check if the transaction amount isn't a number
+       520-error-trans-amt.
+
+           if (ei-trans-amt is not numeric) then
+
+               move ws-con-error-star to ws-erstrs-trans-amt
+               move "Y" to ws-err-chk-trans-amt
+
+           end-if.
+
+      *Check if the payment type is incorrect
+       530-error-payment-type.
+
+           if (ei-pay-type not equal ws-con-pay-type-CA    and
+               ei-pay-type not equal ws-con-pay-type-CR    and
+               ei-pay-type not equal ws-con-pay-type-DB)   then
+
+               move ws-con-error-star to ws-erstrs-pay-type
+               move "Y" to ws-err-chk-pay-type
+
+           end-if.
+       
+      *Check if the store number is wrong
+       540-error-store-number.
+
+           if (ei-store-num not equal ws-con-store-num-01  and
+               ei-store-num not equal ws-con-store-num-02  and
+               ei-store-num not equal ws-con-store-num-03  and
+               ei-store-num not equal ws-con-store-num-07) then
+
+               move ws-con-error-star to ws-erstrs-store-num
+               move "Y" to ws-err-chk-store-num
+
+           end-if.
+
+      *Check if the invoice prefix isn't alphabetic
+       550-error-invoice-prefix.
+
+           if (ei-inv-prefix is not alphabetic)
+
+               move ws-con-error-star to ws-erstrs-inv-prefix
+               move "Y" to ws-err-chk-inv-prefix
+
+           end-if.
+
+      *Check if the invoice number isn't numeric
+       560-error-invoice-number.
+
+           if (ei-inv-number is not numeric)
+
+               move ws-con-error-star to ws-erstrs-inv-number
+               move "Y" to ws-err-chk-inv-number
+
+           end-if.
+
+      *Check if the sku number is blank
+       570-error-sku-number.
+
+           if (ei-sku-code equals spaces)
+
+               move ws-con-error-star to ws-erstrs-sku-code
+               move "Y" to ws-err-chk-sku-code
+
+           end-if.
+
       *Close the files that were used
        999-close-files.
-           close input-file invalid-file valid-file.
+           close input-file valid-file error-file
+           error-report.
+        
 
        end program Program1.
