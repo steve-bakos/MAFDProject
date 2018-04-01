@@ -12,7 +12,7 @@
 
       * Input-file declaration
            select input-file
-               assign to "../../../data/valid.out"
+               assign to "../../../../Program1/data/valid.out"
                organization is line sequential.
 
       * Output-file declarations
@@ -320,12 +320,10 @@
 
            perform 100-openfiles.
            perform 200-readfiles.
-           perform 300-writeline
-               until ws-eof is equal to "Y".
+           perform 300-writeline until ws-eof = "Y".
            perform 400-writereport.
            perform 500-closefiles.
 
-           accept return-code.
            goback.
 
        100-openfiles.
