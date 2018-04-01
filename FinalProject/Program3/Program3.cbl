@@ -363,6 +363,7 @@
            move    ws-calc-tax-owing   to ws-dl-tax-owing.
            add     ws-calc-tax-owing   to ws-calc-total-tax.
 
+      *Tax has been included here. It might not need to be.
            compute ws-calc-total-trans rounded
                = ( ws-calc-tax-owing   +  ws-calc-trans-amt).
            move    ws-calc-total-trans to ws-dl-total-owing.
