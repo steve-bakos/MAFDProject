@@ -18,7 +18,7 @@
       * Output-file declarations
 
            select snl-file
-               assign to "../../../data/sales-layaway-records.out"
+               assign to "../../../data/S&L-records.out"
                organization is line sequential.
 
            select ret-file
