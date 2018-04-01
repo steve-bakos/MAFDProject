@@ -3,7 +3,8 @@
 
        author.Steve Bakos.
        date-written.March 31st, 2018
-
+      *Purpose: Filter out invalid records and create an error report
+      *         showing what is wrong with the invalid records.
 
        environment division.
        configuration section.
