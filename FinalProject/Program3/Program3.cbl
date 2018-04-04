@@ -193,11 +193,17 @@
            05 ws-dl-sku-code                       pic x(15).
 
        01 ws-percentages.
-           05 ws-prct-CA                           pic 9(3)
+           05 ws-prct-CA                           pic 9(3)v99
                value 0.
-           05 ws-prct-CR                           pic 9(3)
+           05 ws-prct-CR                           pic 9(3)v99
                value 0.
-           05 ws-prct-DB                           pic 9(3)
+           05 ws-prct-DB                           pic 9(3)v99
+               value 0.
+           05 ws-prct-3dp-CA                       pic 9v9(5)
+               value 0.
+           05 ws-prct-3dp-CR                       pic 9v9(5)
+               value 0.
+           05 ws-prct-3dp-DB                       pic 9v9(5)
                value 0.
 
        01 ws-page-count.
@@ -234,7 +240,7 @@
        01 ws-CA-typed-transactions.
            05 filler                               pic x(31)
                value "PERCENTAGE OF CA TRANSACTIONS: ".
-           05 ws-CA-type-trans                     pic zz9
+           05 ws-CA-type-trans                     pic zz9.99
                value 0.
            05 filler                               pic x
                value "%".
@@ -242,7 +248,7 @@
        01 ws-CR-typed-transactions.
            05 filler                               pic x(31)
                value "PERCENTAGE OF CR TRANSACTIONS: ".
-           05 ws-CR-type-trans                     pic zz9
+           05 ws-CR-type-trans                     pic zz9.99
                value 0.
            05 filler                               pic x
                value "%".
@@ -250,7 +256,7 @@
        01 ws-DB-typed-transactions.
            05 filler                               pic x(31)
                value "PERCENTAGE OF DB TRANSACTIONS: ".
-           05 ws-DB-type-trans                     pic zz9
+           05 ws-DB-type-trans                     pic zz9.99
                value 0.
            05 filler                               pic x
                value "%".
@@ -424,20 +430,19 @@
       *Calculate percentage totals
        600-calculate-total-percentages.
 
+           compute ws-prct-3dp-CA rounded
+               = (ws-cnt-pay-type-CA / ws-cnt-total-records).
+           compute ws-prct-3dp-CR rounded
+               = (ws-cnt-pay-type-CR / ws-cnt-total-records).
+           compute ws-prct-3dp-DB rounded
+               = (ws-cnt-pay-type-DB / ws-cnt-total-records).
+
            compute ws-prct-CA rounded
-               = (ws-cnt-pay-type-CA / ws-cnt-total-records) * 100.
+               = (ws-prct-3dp-CA * 100).
            compute ws-prct-CR rounded
-               = (ws-cnt-pay-type-CR / ws-cnt-total-records) * 100.
-
-      *I'm not sure if this is the right way to handle this. The result
-      *doing this is 45%, making these three total together to 100%.
-
-      *If you round this, this number goes from 45.54 to 46, making the
-      *result 101% when you add the 3 together. This lost its rounding
-      *because it was the furthest away from the actual whole number
-      *while the other two are much closer.
-           compute ws-prct-DB 
-               = (ws-cnt-pay-type-DB / ws-cnt-total-records) * 100.
+               = (ws-prct-3dp-CR * 100).
+           compute ws-prct-DB rounded
+               = (ws-prct-3dp-DB * 100).
 
       *Print the calculated totals thus far.
        700-print-totals.
