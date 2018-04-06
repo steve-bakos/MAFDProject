@@ -117,7 +117,7 @@
                value 0.
 
        01 ws-report-header.
-           05 filler                               pic x(42).
+           05 filler                               pic x(30).
            05 filler                               pic x(22)
                value "SALES & LAYAWAY REPORT".
            05 filler                               pic x(9).
@@ -132,13 +132,10 @@
            05 filler                               pic x(13).
            05 filler                               pic x(3)
                value "TAX".
-           05 filler                               pic x(12).
-           05 filler                               pic x(5)
-               value "TOTAL".
            05 filler                               pic x(5).
            05 filler                               pic x(7)
                value "PAYMENT".
-           05 filler                               pic x.
+           05 filler                               pic xx.
            05 filler                               pic x(5)
                value "STORE".
            05 filler                               pic x(5).
@@ -158,13 +155,10 @@
            05 filler                               pic x(11).
            05 filler                               pic x(5)
                value "OWING".
-           05 filler                               pic x(11).
-           05 filler                               pic x(5)
-               value "OWING".
-           05 filler                               pic x(7).
+           05 filler                               pic x(6).
            05 filler                               pic x(4)
                value "TYPE".
-           05 filler                               pic x(2).
+           05 filler                               pic x(3).
            05 filler                               pic x(6)
                value "NUMBER".
            05 filler                               pic x(4).
@@ -181,8 +175,6 @@
            05 ws-dl-trans-amt                      pic $zzz,zz9.99.
            05 filler                               pic x(5).
            05 ws-dl-tax-owing                      pic $zzz,zz9.99.
-           05 filler                               pic x(5).
-           05 ws-dl-total-owing                    pic $zzz,zz9.99.
            05 filler                               pic x(5).
            05 ws-dl-pay-type                       pic xx.
            05 filler                               pic x(5).
@@ -207,7 +199,7 @@
                value 0.
 
        01 ws-page-count.
-           05 filler                               pic x(80).
+           05 filler                               pic x(79).
            05 filler                               pic x(5)
                value "PAGE ".
            05 ws-pg-count                          pic 99
@@ -221,7 +213,7 @@
 
        01 ws-L-total-record-count.
            05 filler                               pic x(33)
-               value "TOTAL NUMBER OF L TYPES RECORDS: ".
+               value "TOTAL NUMBER OF L TYPED RECORDS: ".
            05 ws-L-tot-record-count                pic zz9
                value 0.
 
@@ -368,11 +360,8 @@
 
            move    ws-calc-tax-owing   to ws-dl-tax-owing.
            add     ws-calc-tax-owing   to ws-calc-total-tax.
-
-      *Fix this later. Remove the compute, but keep what it does.
-           compute ws-calc-total-trans rounded
-               = ( ws-calc-trans-amt).
-           move    ws-calc-total-trans to ws-dl-total-owing.
+      
+           move ws-calc-trans-amt to ws-calc-total-trans.
 
            if (il-trans-code = ws-con-trans-code-L) then
                add ws-calc-total-trans to ws-calc-total-L-amt

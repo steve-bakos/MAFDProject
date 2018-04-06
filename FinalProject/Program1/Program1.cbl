@@ -179,13 +179,52 @@
 
        01 ws-error-stars.
            05 ws-erstrs-trans-code             pic x.
+           05 filler                           pic x
+               value spaces.
            05 ws-erstrs-trans-amt              pic x(7).
+           05 filler                           pic x
+               value spaces.
            05 ws-erstrs-pay-type               pic xx.
+           05 filler                           pic x
+               value spaces.
            05 ws-erstrs-store-num              pic xx.
+           05 filler                           pic x
+               value spaces.
            05 ws-erstrs-inv-prefix             pic xx.
-           05 filler                           pic x.
+           05 filler                           pic x
+               value spaces.
            05 ws-erstrs-inv-number             pic x(6).
+           05 filler                           pic x
+               value spaces.
            05 ws-erstrs-sku-code               pic x(15).
+
+       01 ws-output-record.
+           05 ws-out-trans-code                pic x
+               value spaces.
+           05 filler                           pic x
+               value spaces.
+           05 ws-out-trans-amt                 pic 9(7)
+               value 0.
+           05 filler                           pic x
+               value spaces.
+           05 ws-out-pay-type                  pic xx
+               value spaces.
+           05 filler                           pic x
+               value spaces.
+           05 ws-out-store-num                 pic xx
+               value spaces.
+           05 filler                           pic x
+               value spaces.
+           05 ws-out-inv-prefix                pic xx
+               value spaces.
+           05 filler                           pic x
+               value spaces.
+           05 ws-out-inv-number                pic 9(6)
+               value 0.
+           05 filler                           pic x
+               value spaces.
+           05 ws-out-sku-code                  pic x(15)
+               value spaces.
 
        procedure division.
        000-main.
@@ -346,6 +385,15 @@
        300-invalid-record.
 
            write invalid-line from input-line.
+      *    move il-trans-code to   ws-out-trans-code.
+      *    move il-trans-amt  to   ws-out-trans-amt.
+      *    move il-store-num  to   ws-out-store-num.
+      *    move il-inv-prefix to   ws-out-inv-prefix.
+      *    move il-inv-number to   ws-out-inv-number.
+      *    move il-pay-type   to   ws-out-pay-type.
+      *    move il-sku-code   to   ws-out-sku-code.
+      *
+      *    write invalid-line from ws-output-record.
            add 1 to ws-cnt-invalid-records.
 
       *if the record is valid
@@ -390,7 +438,17 @@
       *Write the records with errors to the report
        440-write-error-records.
 
-           write error-out from error-in.
+         
+
+           move ei-trans-code to ws-out-trans-code.
+           move ei-trans-code to ws-out-trans-amt.
+           move ei-pay-type   to ws-out-pay-type.
+           move ei-store-num  to ws-out-store-num.
+           move ei-inv-prefix to ws-out-inv-prefix.
+           move ei-inv-number to ws-out-inv-number.
+           move ei-sku-code   to ws-out-sku-code.
+
+           write error-out from ws-output-record.
            perform 500-list-mistakes-with-record.
 
            write error-out from ws-error-stars.
@@ -401,6 +459,10 @@
 
            read error-file
                at end move "Y" to ws-eof-flag.
+      
+           if (ei-trans-code = spaces)
+           then move "Y" to ws-eof-flag
+           end-if.
 
       *Tell the user what is wrong with these records
        460-write-error-messages.

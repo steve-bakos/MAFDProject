@@ -1,166 +1,149 @@
             ERROR REPORT
 
-S0000999CR01AS-0000A3WI8HRW8H43FJSHF
-               ******
+S 000000S CR 01 AS 0000A3 WI8HRW8H43FJSHF
+                   ******
  - Inv number can only be numeric (Chars 15 - 21)
 
-R0002499CR02BS-000212
-                     ***************
+R 000000R CR 02 BS 000212
+                          ***************
  - The SKU code cannot be blank (Chars 22 - 36)
 
-S000100XCW02XX-000001AADFSKJ84MS0913
- *********
+S 000000S CW 02 XX 000001 AADFSKJ84MS0913
+  ******* **
  - Non-numeric data here (Chars 2 - 8)
  - Incorrect payment type (Chars 9 - 10)
 
-S0008999CR02AS-0S0030WI8HRW8H43FJSHF
-               ******
+S 000000S CR 02 AS 0S0030 WI8HRW8H43FJSHF
+                   ******
  - Inv number can only be numeric (Chars 15 - 21)
 
-X000099XCR02AS-000033WI8HRW8H43FJSHF
-********
+X 000000X CR 02 AS 000033 WI8HRW8H43FJSHF
+* *******
  - This transaction code is wrong (Char 1)
  - Non-numeric data here (Chars 2 - 8)
 
-R0012499CR02AS-000122
-                     ***************
+R 000000R CR 02 AS 000122
+                          ***************
  - The SKU code cannot be blank (Chars 22 - 36)
 
-X0014999CR02AZ-000036247R20EHF02EF8E
+X 000000X CR 02 AZ 000036 247R20EHF02EF8E
 *
  - This transaction code is wrong (Char 1)
 
-S0002999DW02AS-000037WI8HRW8H43FJSH2
-        **
+S 000000S DW 02 AS 000037 WI8HRW8H43FJSH2
+          **
  - Incorrect payment type (Chars 9 - 10)
 
-R0002499CR02AS-000212
-                     ***************
+R 000000R CR 02 AS 000212
+                          ***************
  - The SKU code cannot be blank (Chars 22 - 36)
 
-S0002999DW02AS-000217WI8HRW8H43FJSHF
-        **
+S 000000S DW 02 AS 000217 WI8HRW8H43FJSHF
+          **
  - Incorrect payment type (Chars 9 - 10)
 
-X0012999DB02ZZ-000219247R20EHF02EF8E
+X 000000X DB 02 ZZ 000219 247R20EHF02EF8E
 *
  - This transaction code is wrong (Char 1)
 
-L0004999DB02A3-000224LFW8H88W84HFW4F
-            **
+L 000000L DB 02 A3 000224 LFW8H88W84HFW4F
+                **
  - Inv prefix cannot be numeric (Chars 13 - 14)
 
-S0002000CA02X3-000225SDFSKJ84MS09123
-            **
+S 000000S CA 02 X3 000225 SDFSKJ84MS09123
+                **
  - Inv prefix cannot be numeric (Chars 13 - 14)
 
-L0014999DB12AD-000234LFW8H88W84HFW4F
-          **
+L 000000L DB 12 AD 000234 LFW8H88W84HFW4F
+             **
  - Incorrect store number (Chars 11 - 12)
 
-R0002999CW02XX-000335SDFSKJ84MS09123
-        **
+R 000000R CW 02 XX 000335 SDFSKJ84MS09123
+          **
  - Incorrect payment type (Chars 9 - 10)
 
-C0014999CR02AZ-000336247R20EHF02EF8E
+C 000000C CR 02 AZ 000336 247R20EHF02EF8E
 *
  - This transaction code is wrong (Char 1)
 
-R0002499CR13AS-000402FLW8H4FW8H4FWF4
-          **
+R 000000R CR 13 AS 000402 FLW8H4FW8H4FWF4
+             **
  - Incorrect store number (Chars 11 - 12)
 
-S0001000CA13XX-000408SDFSKJ84MS09123
-          **
+S 000000S CA 13 XX 000408 SDFSKJ84MS09123
+             **
  - Incorrect store number (Chars 11 - 12)
 
-R0002499CR03B3-000402FLW8H4FW8H4FWF4
-            **
+R 000000R CR 03 B3 000402 FLW8H4FW8H4FWF4
+                **
  - Inv prefix cannot be numeric (Chars 13 - 14)
 
-S0014999CR17BZ-000406247R20EHF02EF8E
-          **
+S 000000S CR 17 BZ 000406 247R20EHF02EF8E
+             **
  - Incorrect store number (Chars 11 - 12)
 
-R0002999DB07BS-00S407WI8HRW8H43FJSHF
-               ******
+R 000000R DB 07 BS 00S407 WI8HRW8H43FJSHF
+                   ******
  - Inv number can only be numeric (Chars 15 - 21)
 
-S0001000CA07BX-00S508SDFSKJ84MS09123
-               ******
+S 000000S CA 07 BX 00S508 SDFSKJ84MS09123
+                   ******
  - Inv number can only be numeric (Chars 15 - 21)
 
-R0002499CR07BS-000512
-                     ***************
+R 000000R CR 07 BS 000512
+                          ***************
  - The SKU code cannot be blank (Chars 22 - 36)
 
-S007100XCW07XX-000501AADFSKJ84MS0913
- *********
+S 000000S CW 07 XX 000501 AADFSKJ84MS0913
+  ******* **
  - Non-numeric data here (Chars 2 - 8)
  - Incorrect payment type (Chars 9 - 10)
 
-S000099XCR07AS-000633WI8HRW8H43FJSHF
- *******
+S 000000S CR 07 AS 000633 WI8HRW8H43FJSHF
+  *******
  - Non-numeric data here (Chars 2 - 8)
 
-R0012499CR07AS-000722
-                     ***************
+R 000000R CR 07 AS 000722
+                          ***************
  - The SKU code cannot be blank (Chars 22 - 36)
 
-X0014999CR07AZ-000636247R20EHF02EF8E
+X 000000X CR 07 AZ 000636 247R20EHF02EF8E
 *
  - This transaction code is wrong (Char 1)
 
-S0002999DW07AS-000637WI8HRW8H43FJSH2
-        **
+S 000000S DW 07 AS 000637 WI8HRW8H43FJSH2
+          **
  - Incorrect payment type (Chars 9 - 10)
 
-R0002499CR07AS-000612
-                     ***************
+R 000000R CR 07 AS 000612
+                          ***************
  - The SKU code cannot be blank (Chars 22 - 36)
 
-R0002400CA07XX-00S615SDFSKJ84MS09123
-               ******
+R 000000R CA 07 XX 00S615 SDFSKJ84MS09123
+                   ******
  - Inv number can only be numeric (Chars 15 - 21)
 
-S0002999DW07AS-000617WI8HRW8H43FJSHF
-        **
+S 000000S DW 07 AS 000617 WI8HRW8H43FJSHF
+          **
  - Incorrect payment type (Chars 9 - 10)
 
-W0012999DB07ZZ-000619247R20EHF02EF8E
+W 000000W DB 07 ZZ 000619 247R20EHF02EF8E
 *
  - This transaction code is wrong (Char 1)
 
-S0001000CA07X3-000631SDFSKJ84MS09123
-            **
+S 000000S CA 07 X3 000631 SDFSKJ84MS09123
+                **
  - Inv prefix cannot be numeric (Chars 13 - 14)
 
-R0000499CR07AS-0N0622F4WO8JFO8W4JFW8
-               ******
+R 000000R CR 07 AS 0N0622 F4WO8JFO8W4JFW8
+                   ******
  - Inv number can only be numeric (Chars 15 - 21)
 
-R0002999CW07XX-000635SDFSKJ84MS09123
-        **
+R 000000R CW 07 XX 000635 SDFSKJ84MS09123
+          **
  - Incorrect payment type (Chars 9 - 10)
 
-X0014999CR07AZ-000636247R20EHF02EF8E
+X 000000X CR 07 AZ 000636 247R20EHF02EF8E
 *
  - This transaction code is wrong (Char 1)
-
-
-************   *********************
- - This transaction code is wrong (Char 1)
- - Non-numeric data here (Chars 2 - 8)
- - Incorrect payment type (Chars 9 - 10)
- - Incorrect store number (Chars 11 - 12)
- - Inv number can only be numeric (Chars 15 - 21)
- - The SKU code cannot be blank (Chars 22 - 36)
-
-Total Number of Invalid Records:  36
-************   ******
- - This transaction code is wrong (Char 1)
- - Non-numeric data here (Chars 2 - 8)
- - Incorrect payment type (Chars 9 - 10)
- - Incorrect store number (Chars 11 - 12)
- - Inv number can only be numeric (Chars 15 - 21)
 
