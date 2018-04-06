@@ -13,25 +13,25 @@
        file-control.
       *Input-file declaration
            select input-file
-           assign to "../../../data/project1.dat"
-           organization is line sequential.
+               assign to "../../../data/project1.dat"
+               organization is line sequential.
 
            select error-file
-           assign to "../../../data/invalid.out"
-           organization is line sequential.
+               assign to "../../../data/invalid.out"
+               organization is line sequential.
 
       *Output file declarations
            select valid-file
-           assign to "../../../data/valid.out"
-           organization is line sequential.
+               assign to "../../../data/valid.out"
+               organization is line sequential.
 
            select invalid-file
-           assign to "../../../data/invalid.out"
-           organization is line sequential.
+               assign to "../../../data/invalid.out"
+               organization is line sequential.
 
            select error-report
-           assign to "../../../data/error-report.out"
-           organization is line sequential.
+               assign to "../../../data/error-report.out"
+               organization is line sequential.
 
        data division.
        file section.

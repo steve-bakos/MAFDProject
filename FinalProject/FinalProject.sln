@@ -9,6 +9,8 @@ Project("{535C04D7-A2A5-47C7-83E0-B340A995CD1F}") = "Program3", "Program3\Progra
 EndProject
 Project("{535C04D7-A2A5-47C7-83E0-B340A995CD1F}") = "Program1", "Program1\Program1.cblproj", "{8C78721D-B0AA-4919-A830-FEC97A6C1943}"
 EndProject
+Project("{535C04D7-A2A5-47C7-83E0-B340A995CD1F}") = "Program4", "Program4\Program4.cblproj", "{A8B46046-D7A7-4638-BC54-1E57102801E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,12 @@ Global
 		{8C78721D-B0AA-4919-A830-FEC97A6C1943}.Release|Any CPU.ActiveCfg = Release|x86
 		{8C78721D-B0AA-4919-A830-FEC97A6C1943}.Release|x86.ActiveCfg = Release|x86
 		{8C78721D-B0AA-4919-A830-FEC97A6C1943}.Release|x86.Build.0 = Release|x86
+		{A8B46046-D7A7-4638-BC54-1E57102801E9}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A8B46046-D7A7-4638-BC54-1E57102801E9}.Debug|x86.ActiveCfg = Debug|x86
+		{A8B46046-D7A7-4638-BC54-1E57102801E9}.Debug|x86.Build.0 = Debug|x86
+		{A8B46046-D7A7-4638-BC54-1E57102801E9}.Release|Any CPU.ActiveCfg = Release|x86
+		{A8B46046-D7A7-4638-BC54-1E57102801E9}.Release|x86.ActiveCfg = Release|x86
+		{A8B46046-D7A7-4638-BC54-1E57102801E9}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

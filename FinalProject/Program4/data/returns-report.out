@@ -1,0 +1,27 @@
+                              RETURNS REPORT
+
+                                                                               PAGE 01
+
+   TRANS     TRANS             TAX     PAYMENT  STORE     INVOICE            SKU
+   CODE      AMOUNT            OWED      TYPE   NUMBER    NUMBER             CODE
+
+     R     $     24.99     $      3.25     CR     01     AS-000102     FLW8H4FW8H4FWF4
+     R     $     24.99     $      3.25     CR     01     BS-000102     FLW8H4FW8H4FWF4
+     R     $     29.99     $      3.90     DB     01     BS-000107     WI8HRW8H43FJSHF
+     R     $     89.99     $     11.70     CR     01     BS-000110     WI8HRW8H43FJSHF
+     R     $     20.00     $      2.60     CA     02     BX-000015     SDFSKJ84MS09123
+     R     $     24.99     $      3.25     CR     02     AS-000102     FLW8H4FW8H4FWF4
+     R     $     29.99     $      3.90     CA     02     XX-000035     SDFSKJ84MS09123
+     R     $     20.00     $      2.60     CA     02     XX-000215     SDFSKJ84MS09123
+     R     $     24.99     $      3.25     CR     02     AS-000202     FLW8H4FW8H4FWF4
+     R     $    124.99     $     16.25     CR     02     AS-000322     F4WO8JFO8W4JFW8
+     R     $     89.99     $     11.70     CR     07     BS-000510     WI8HRW8H43FJSHF
+     R     $     20.00     $      2.60     CA     07     BX-000515     SDFSKJ84MS09123
+     R     $     24.99     $      3.25     CR     07     AS-000502     FLW8H4FW8H4FWF4
+     R     $     29.99     $      3.90     CA     07     XX-000635     SDFSKJ84MS09123
+     R     $     24.99     $      3.25     CR     07     AS-000602     FLW8H4FW8H4FWF4
+
+
+TOTAL NUMBER OF R TYPED RECORDS:  15
+TOTAL RETURNS FROM R TYPED RECORDS: $    604.88
+TOTAL TAX OWED TO US: $     78.65
